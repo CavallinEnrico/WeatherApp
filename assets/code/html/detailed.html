@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="it">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dettagli Meteo</title> <!-- MODIFICARE E AGGIUNGERE NOME COMUNE -->
-        <link rel="stylesheet" href="../css/style.css">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dettagli Meteo</title>
+        <!-- MODIFICARE E AGGIUNGERE NOME COMUNE -->
+        <link rel="stylesheet" href="../css/style.css" />
     </head>
     <body>
-        <div class="info-cards">
-            <div class="info-card" id="temperature-card">
-                <label for="temperature-card">Temperatura</label>
-                <p><span class="info-card-value">20</span><b>°C</b><br>Attuale</p>
-            </div>
+        <button class="toggle-theme small">THEME</button>
+        <div class="info-card" id="temperature-card">
+            <h2>Temperatura</h2>
+            <h1 id="temp-value" class="card-value">20°C</h1>
+            <p>Attuale</p>
         </div>
     </body>
+    <script src="../js/detailed.js"></script>
+</html>
