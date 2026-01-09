@@ -26,6 +26,7 @@
     --bg-light: oklch(0.24 0 264);
     --bg-primary: oklch(40.54% 0.00005 271.152);
     --text: oklch(0.96 0 264);
+    --clock: oklch(0.76 0 264);
     --text-muted: oklch(0.76 0 264);
     --text-value: oklch(0.96 0 264);
     --primary: oklch(0.9 0.17 100);
@@ -44,6 +45,7 @@ body.light {
     --bg-light: oklch(0.82 0 264);
     --bg-primary: oklch(97.015% 0.00011 271.152);
     --text: oklch(0.4 0 264);
+    --clock: oklch(0.4 0 264);
     --text-muted: oklch(0.65 0 264);
     --text-value: oklch(0.33 0 264);
     --primary: oklch(0.65 0.15 264);
@@ -163,16 +165,18 @@ a:hover {
     margin: 4rem 0;
 }
 
+
 .nav {
     margin-top: 1rem;
     background: var(--bg-light);
     border-radius: 1.5rem;
     box-shadow: var(--shadow-s);
-    padding: 0.7rem;
+    padding: 0.4rem;
     display: flex;
     align-items: center;
-    border-radius: 2rem;
-    padding-left: 3rem;
+    border-radius: 3rem;
+    padding-left: 0.6rem;
+    padding-right: 2rem;
 }
 
 .app-title {
@@ -185,6 +189,35 @@ a:hover {
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
     margin-bottom: 0px;
+}
+
+.clock {
+    font: 400 1.5rem/1.2em var(--ff);
+    color: var(--clock);
+}
+
+.utils {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    margin-left: auto;
+}
+
+.home-link a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 1rem;
+}
+
+.home-link h1 {
+    font: 400 1.3rem/1.2em var(--ff);
+    color: var(--clock);
+    margin-bottom: 0;
+}
+
+#toggle-theme {
+    cursor: pointer;
 }
 
 /* Cards */
