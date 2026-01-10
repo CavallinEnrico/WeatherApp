@@ -5,8 +5,14 @@ toggleThemeButton.addEventListener("click", () => {
     document.body.classList.toggle("light")
     if(document.body.classList.contains("light")) {
         toggleThemeButton.src = "../downloads/logos/moon.svg"
+        document.querySelectorAll(".app-title img").forEach((img) => {
+            img.style.filter = "invert(0.7)"
+        })
     } else {
         toggleThemeButton.src = "../downloads/logos/sun.svg"
+        document.querySelectorAll(".app-title img").forEach((img) => {
+            img.style.filter = "invert(0)"
+        })
     }
 })
 
