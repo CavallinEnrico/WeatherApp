@@ -8,29 +8,40 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
+
         <section class="navbar">
             <div class="nav">
-                <h1 class="app-title">WeatherApp</h1>
-                <div class="home-link"><a href="../../index.html"">
-                    <img src="../downloads/logos/cloud.svg" height="30rem" alt="Home" />
-                    <h1>Home</h1></a>
-                </a></div>
-                <div class="utils">
-                    <p class="clock">00:00</p>
-                    <img src="../downloads/logos/sun.svg" height="30rem" alt="Theme" id="toggle-theme">
+                <div class="item" style="grid-area: app-title"><h1 class="app-title">WeatherApp</h1></div>
+                <div class="item" style="grid-area: home">
+                    <div class="home-link"><a href="../../index.html">
+                        <img src="../downloads/logos/cloud.svg" height="30rem" alt="Home" />
+                        <h1>Home</h1></a>
+                    </div>
                 </div>
+                <div class="item" style="grid-area: clock"><p class="clock">00:00</p></div>
+                <div class="item" style="grid-area: theme"><img src="../downloads/logos/sun.svg" height="30rem" alt="Theme" id="toggle-theme"></div>
+                
             </div>
         </section>
+
         <section class="hero">
             <div class="info-card" id="temperature-card">
                 <h2>Temperatura</h2>
                 <h1 id="temp-value" class="card-value">20°C</h1>
-                <p>Attuale</p>
+                <p class="time">Attuale</p>
             </div>
             <div class="info-card" id="humidity-card">
                 <h2>Umidità</h2>
                 <h1 id="humidity-value" class="card-value">20%</h1>
-                <p>Attuale</p>
+                <p class="time">Attuale</p>
+            </div>
+            <div class="info-card" id="presentation-card">
+                <h2>Presentazione</h2>
+                <p id="presentation-paragraph" class="card-text">Presentazione scritta delle condizioni metereologiche odierne generata dall'API generate_response che implementa GPT-3.5-turbo</p>
+            </div>
+            <div class="info-card" id="precipitations-card">
+                <h2>Precipitazioni</h2>
+                <h1 id="precipitations-value" class="card-value">20%</h1>
             </div>
         </section>
     </body>

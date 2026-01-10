@@ -165,18 +165,48 @@ a:hover {
     margin: 4rem 0;
 }
 
+/* Navbar */
 
 .nav {
     margin-top: 1rem;
     background: var(--bg-light);
-    border-radius: 1.5rem;
+    border-radius: 2rem;
     box-shadow: var(--shadow-s);
     padding: 0.4rem;
+    display: grid;
+    grid-template-columns: 20rem 4fr 1fr 1fr;
+    align-items: center;
+    grid-template-areas:
+    "app-title home clock theme";
+}
+
+@media (max-width: 40rem) {
+    .nav {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+        "app-title theme"
+        "home clock";
+    }
+    .app-title {
+        padding-right: 6rem;
+    }
+
+    .clock {
+        margin-left: auto;
+        margin-right: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .app-title {
+        padding-right: 4rem;
+    }
+}
+
+.item {
     display: flex;
     align-items: center;
-    border-radius: 3rem;
-    padding-left: 0.6rem;
-    padding-right: 2rem;
+    justify-content: flex-start;
 }
 
 .app-title {
@@ -197,18 +227,11 @@ a:hover {
     color: var(--clock);
 }
 
-.utils {
-    display: flex;
-    align-items: center;
-    gap: 5rem;
-    margin-left: auto;
-}
-
 .home-link a {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-left: 1rem;
+    margin-right: auto;
 }
 
 .home-link h1 {
@@ -219,6 +242,8 @@ a:hover {
 
 #toggle-theme {
     cursor: pointer;
+    margin-left: auto;
+    margin-right: 1rem;
 }
 
 /* Cards */
@@ -239,6 +264,16 @@ a:hover {
     min-height: 180px;
 }
 
+#presentation-card {
+    max-width: 430px;
+    align-items: flex-start;
+    padding: 2rem;
+}
+
+#presentation-paragraph {
+    margin-top: 1rem;
+}
+
 
 .info-card h2 {
     margin-bottom: 0.05rem;
@@ -249,4 +284,3 @@ a:hover {
     color: var(--text-value);
     margin-bottom: 0.7rem;
 }
-
