@@ -180,6 +180,12 @@ a:hover {
     "app-title home clock theme";
 }
 
+@media (min-width: 40rem) {
+    .app-title {
+        padding-right: 8rem;
+    }
+}
+
 @media (max-width: 40rem) {
     .nav {
         grid-template-columns: 1fr 1fr;
@@ -194,6 +200,9 @@ a:hover {
     .clock {
         margin-left: auto;
         margin-right: 1rem;
+    }
+    .home-link {
+        margin-left: 1rem;
     }
 }
 
@@ -215,7 +224,6 @@ a:hover {
     box-shadow: var(--shadow-s);
     background: var(--bg-primary);
     padding-left: 2rem;
-    padding-right: 8rem;
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
     margin-bottom: 0px;
