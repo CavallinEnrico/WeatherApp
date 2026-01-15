@@ -319,6 +319,18 @@ a:hover {
     border-radius: 0.5rem;
 }
 
+.paragraph {
+    height: 1rem;
+    width: 23rem;
+    margin-bottom: 0.3rem;
+}
+
+.paragraph:last-child {
+    width: 18rem;
+}
+
+/* AL CARICAMENTO SKELETON NON SCOMPARE */
+
 @keyframes skeleton-loading {
     0% {
         background-color: hsl(0, 0%, 73%);
