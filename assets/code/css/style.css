@@ -293,6 +293,10 @@ a:hover {
     margin-top: 1rem;
 }
 
+#precipitations-value {
+    font-size: 3rem;
+}
+
 
 .info-card h2 {
     margin-bottom: 0.05rem;
@@ -302,4 +306,24 @@ a:hover {
     font: var(--value);
     color: var(--text-value);
     margin-bottom: 0.7rem;
+}
+
+.skeleton {
+    animation: skeleton-loading 0.7s linear infinite alternate;
+    opacity: 0.4;
+}
+
+.skeleton-text {
+    width: 8.75rem;
+    height: 4.2rem;
+    border-radius: 0.5rem;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(0, 0%, 73%);
+    }
+    100% {
+        background-color: hsl(200, 0%, 95%);
+    }
 }
