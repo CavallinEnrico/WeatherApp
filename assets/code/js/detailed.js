@@ -1,13 +1,14 @@
 const urlParams = new URLSearchParams(window.location.search)
 const lat = urlParams.get('lat')
 const lon = urlParams.get('lon')
+const name = urlParams.get('comune')
 
 // toggle theme
 const toggleThemeButton = document.querySelector("#toggle-theme")
 
 toggleThemeButton.addEventListener("click", () => {
     document.body.classList.toggle("light")
-    if(document.body.classList.contains("light")) {
+    if (document.body.classList.contains("light")) {
         toggleThemeButton.src = "../downloads/logos/moon.svg"
         document.querySelectorAll(".app-title img").forEach((img) => {
             img.style.filter = "invert(0.7)"
@@ -23,6 +24,8 @@ toggleThemeButton.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
     updateClock()
     fetchDailyWeather(0)
+    document.title = `Dettagli meteo: ${name}`
+    document.querySelector(".app-title h1").innerText = name
 })
 
 
@@ -54,7 +57,7 @@ async function fetchDailyWeather(dateDiff) {
 
 async function fetchPresentation(prec, temp, feelsLike, maxTemp, minTemp, humidity, windSpeed, windDir) {
     console.log(document.querySelector("#presentation-paragraph").innerHTML)
-    const presentationData = await fetch(`https://weather-app-backend-mu-weld.vercel.app/api/generate_response?precipitationsStr=${prec}&actual_temperatureStr=${temp}&feels_like_temperatureStr=${feelsLike}&max_temperatureStr=${maxTemp}&min_temperatureStr=${minTemp}&humidityStr=${humidity}&wind_speedStr=${windSpeed}&wind_direction=NE`, {method: "GET"})
+    const presentationData = await fetch(`https://weather-app-backend-mu-weld.vercel.app/api/generate_response?precipitationsStr=${prec}&actual_temperatureStr=${temp}&feels_like_temperatureStr=${feelsLike}&max_temperatureStr=${maxTemp}&min_temperatureStr=${minTemp}&humidityStr=${humidity}&wind_speedStr=${windSpeed}&wind_direction=NE`, { method: "GET" })
     const presentationJson = await presentationData.json()
     document.querySelector("#presentation-paragraph").innerText = presentationJson.message
 }
@@ -63,10 +66,10 @@ function formatDate(diff) {
     let returnDate = ""
     const date = new Date()
     date.setDate(date.getDate() + diff)
-    returnDate = date.getFullYear()+"-"
-    if(date.getMonth()+1 < 10)
+    returnDate = date.getFullYear() + "-"
+    if (date.getMonth() + 1 < 10)
         returnDate += "0"
-    returnDate += (date.getMonth()+1)
-    returnDate += "-"+date.getDate()
+    returnDate += (date.getMonth() + 1)
+    returnDate += "-" + date.getDate()
     return returnDate
 }

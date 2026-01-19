@@ -1,11 +1,68 @@
-<html>
-    <head>
-        <title>Weather App</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../css/style.css">
-    </head>
-    <body>
-        <a href="assets/code/detailed.html">Go to Detailed Weather Page</a>
-    </body>
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WeatherApp</title>
+    <link rel="stylesheet" href="assets/code/css/style.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+</head>
+
+<body id="index">
+
+    <section class="navbar">
+        <div class="nav">
+            <div class="item" style="grid-area: app-title">
+                <div class="app-title">
+                    <img src="assets//downloads/logos/search.svg" height="30rem" alt="" />
+                    <h1>WeatherApp</h1>
+                </div>
+            </div>
+            <div class="item" style="grid-area: home">
+                <div class="home-link"><a href="index.html">
+                        <img src="assets/downloads/logos/cloud.svg" height="30rem" alt="Home" />
+                        <h1>Home</h1>
+                    </a>
+                </div>
+            </div>
+            <div class="item" style="grid-area: clock">
+                <p class="clock">00:00</p>
+            </div>
+            <div class="item" style="grid-area: theme"><img src="assets/downloads/logos/sun.svg" height="30rem"
+                    alt="Theme" id="toggle-theme"></div>
+        </div>
+    </section>
+
+    <section class="hero">
+        <div id="map"></div>
+        <p>Regione selezionata:</p>
+        <select id="region">
+            <option value="">-- Seleziona regione --</option>
+        </select>
+
+        <p>Provincia selezionata:</p>
+        <select id="province" disabled>
+            <option value="">-- Seleziona provincia --</option>
+        </select>
+
+        <p>Comune (ricerca):</p>
+        <input type="text" id="comuneSearch" list="comuniList" placeholder="Scrivi il nome del comune..." disabled>
+
+        <datalist id="comuniList"></datalist>
+
+
+        <p>Comune selezionato: <span id="comuneSelezionato"></span></p>
+
+        <button id="inviaBtn">Dettagli</button>
+    </section>
+
+</body>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="assets/code/js/main.js"></script>
+
 </html>

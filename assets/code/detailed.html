@@ -1,61 +1,71 @@
 <!DOCTYPE html>
 <html lang="it">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dettagli Meteo</title>
-        <!-- MODIFICARE E AGGIUNGERE NOME COMUNE -->
-        <link rel="stylesheet" href="css/style.css" />
-    </head>
-    <body>
 
-        <section class="navbar">
-            <div class="nav">
-                <div class="item" style="grid-area: app-title">
-                    <div class="app-title">
-                        <img src="../downloads/logos/search.svg" height="30rem" alt="" />
-                        <h1>WeatherApp</h1>
-                    </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dettagli Meteo</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <section class="navbar">
+        <div class="nav">
+            <div class="item" style="grid-area: app-title">
+                <div class="app-title">
+                    <img src="../downloads/logos/search.svg" height="30rem" alt="" />
+                    <h1>WeatherApp</h1>
                 </div>
-                <div class="item" style="grid-area: home">
-                    <div class="home-link"><a href="../../index.html">
+            </div>
+            <div class="item" style="grid-area: home">
+                <div class="home-link"><a href="../../index.html">
                         <img src="../downloads/logos/cloud.svg" height="30rem" alt="Home" />
-                        <h1>Home</h1></a>
-                    </div>
+                        <h1>Home</h1>
+                    </a>
                 </div>
-                <div class="item" style="grid-area: clock"><p class="clock">00:00</p></div>
-                <div class="item" style="grid-area: theme"><img src="../downloads/logos/sun.svg" height="30rem" alt="Theme" id="toggle-theme"></div>
-                
             </div>
-        </section>
+            <div class="item" style="grid-area: clock">
+                <p class="clock">00:00</p>
+            </div>
+            <div class="item" style="grid-area: theme"><img src="../downloads/logos/sun.svg" height="30rem" alt="Theme"
+                    id="toggle-theme"></div>
 
-        <section class="hero">
-            <div class="info-card" id="temperature-card">
-                <h2>Temperatura</h2>
-                <h1 id="temp-value" class="card-value"><div class="skeleton skeleton-text"></div></h1>
-                <p class="time">Attuale</p>
-            </div>
-            <div class="info-card" id="humidity-card">
-                <h2>Umidità</h2>
-                <h1 id="humidity-value" class="card-value"><div class="skeleton skeleton-text"></div></h1>
-                <p class="time">Attuale</p>
-            </div>
-            <div class="info-card" id="presentation-card">
-                <h2>Presentazione</h2>
-                <h4 id="presentation-paragraph" class="card-text">
-                    <div class="skeleton skeleton-text paragraph"></div>
-                    <div class="skeleton skeleton-text paragraph"></div>
-                    <div class="skeleton skeleton-text paragraph"></div>
-                    <div class="skeleton skeleton-text paragraph"></div>
-                </h4>
-            </div>
-            <div class="info-card" id="precipitations-card">
-                <h2>Precipitazioni</h2>
-                <h1 id="precipitations-value" class="card-value"><div class="skeleton skeleton-text"></div></h1>
-            </div>
-        </section>
-    </body>
-    <script src="js/detailed.js"></script>
+        </div>
+    </section>
+
+    <section class="hero">
+        <div class="info-card" id="temperature-card">
+            <h2>Temperatura</h2>
+            <h1 id="temp-value" class="card-value">
+                <div class="skeleton skeleton-text"></div>
+            </h1>
+            <p class="time">Attuale</p>
+        </div>
+        <div class="info-card" id="humidity-card">
+            <h2>Umidità</h2>
+            <h1 id="humidity-value" class="card-value">
+                <div class="skeleton skeleton-text"></div>
+            </h1>
+            <p class="time">Attuale</p>
+        </div>
+        <div class="info-card" id="presentation-card">
+            <h2>Presentazione</h2>
+            <h4 id="presentation-paragraph" class="card-text">
+                <div class="skeleton skeleton-text paragraph"></div>
+                <div class="skeleton skeleton-text paragraph"></div>
+                <div class="skeleton skeleton-text paragraph"></div>
+                <div class="skeleton skeleton-text paragraph"></div>
+            </h4>
+        </div>
+        <div class="info-card" id="precipitations-card">
+            <h2>Precipitazioni</h2>
+            <h1 id="precipitations-value" class="card-value">
+                <div class="skeleton skeleton-text"></div>
+            </h1>
+        </div>
+    </section>
+</body>
+<script src="js/detailed.js"></script>
+
 </html>
-
-<--Presentazione scritta delle condizioni metereologiche odierne generata dall'API generate_response che implementa GPT-3.5-turbo
