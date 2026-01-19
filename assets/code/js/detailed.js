@@ -53,6 +53,7 @@ async function fetchDailyWeather(dateDiff) {
 }
 
 async function fetchPresentation(prec, temp, feelsLike, maxTemp, minTemp, humidity, windSpeed, windDir) {
+    console.log(document.querySelector("#presentation-paragraph").innerHTML)
     const presentationData = await fetch(`https://weather-app-backend-mu-weld.vercel.app/api/generate_response?precipitationsStr=${prec}&actual_temperatureStr=${temp}&feels_like_temperatureStr=${feelsLike}&max_temperatureStr=${maxTemp}&min_temperatureStr=${minTemp}&humidityStr=${humidity}&wind_speedStr=${windSpeed}&wind_direction=NE`, {method: "GET"})
     const presentationJson = await presentationData.json()
     document.querySelector("#presentation-paragraph").innerText = presentationJson.message

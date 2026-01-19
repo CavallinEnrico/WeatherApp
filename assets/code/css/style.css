@@ -81,8 +81,9 @@ h3 {
 }
 
 h4 {
-    font: var(--h4);
-    color: var(--text);
+    font: var(--p);
+    max-width: 80ch;
+    color: var(--text-muted);
 }
 
 p {
