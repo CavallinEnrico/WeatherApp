@@ -35,11 +35,42 @@
     </section>
 
     <section class="hero">
-        <div class="info-card" id="temperature-card">
-            <h2>Temperatura</h2>
-            <h1 id="temp-value" class="card-value">
-                <div class="skeleton skeleton-text"></div>
+
+        <div class="day-selector">
+            <div class="day-slide-content-smaller" id="-3d">
+                <div class="day-slide-smaller"></div>
+            </div>
+            <div class="day-slide-content-small" id="-2d">
+                <div class="day-slide-small"></div>
+            </div>
+            <div class="day-slide-content" id="-1d">
+                <p>Ieri</p>
+                <div class="day-slide"></div>
+            </div>
+            <div class="day-slide-content" id="0d">
+                <p>Oggi</p>
+                <div class="day-slide"></div>
+            </div>
+            <div class="day-slide-content" id="+1d">
+                <p>Domani</p>
+                <div class="day-slide"></div>
+            </div>
+            <div class="day-slide-content-small" id="+2d">
+                <div class="day-slide-small"></div>
+            </div>
+            <div class="day-slide-content-smaller" id="+3d">
+                <div class="day-slide-smaller"></div>
+            </div>
+        </div>
+
+        <div class="info-card" id="wind-card">
+            <h2>Vento</h2>
+            <h1 id="wind-value" class="card-value">
+                <div class="skeleton skeleton-text smaller"></div>
             </h1>
+            <h2 class="card-value" id="wind-dir-value">
+                <div class="skeleton skeleton-text super-small"></div>
+            </h2>
             <p class="time">Attuale</p>
         </div>
         <div class="info-card" id="humidity-card">
@@ -56,13 +87,41 @@
                 <div class="skeleton skeleton-text paragraph"></div>
                 <div class="skeleton skeleton-text paragraph"></div>
                 <div class="skeleton skeleton-text paragraph"></div>
+                <div class="skeleton skeleton-text paragraph"></div>
             </h4>
         </div>
         <div class="info-card" id="precipitations-card">
             <h2>Precipitazioni</h2>
             <h1 id="precipitations-value" class="card-value">
+                <div class="skeleton skeleton-text smaller"></div>
+            </h1>
+            <p class="time">Attuale</p>
+            <div class="inner-card">
+                <h1 id="precipitations-sum-value" class="card-value">
+                    <div class="skeleton skeleton-text thinner"></div>
+                </h1>
+                <p class="time">Somma</p>
+            </div>
+        </div>
+        <div class="info-card" id="temperature-card">
+            <h2>Temperatura</h2>
+            <h1 id="temp-value" class="card-value">
                 <div class="skeleton skeleton-text"></div>
             </h1>
+            <div class="inner-card">
+                <h1 id="feels-like-value" class="card-value">
+                    <div class="skeleton skeleton-text smaller"></div>
+                </h1>
+                <p class="time minor">Percepita</p>
+                <h3 id="max-value" class="card-value">
+                    <div class="skeleton skeleton-text smaller thinner"></div>
+                </h3>
+                <p class="time minor small">Max</p>
+                <h3 id="min-value" class="card-value">
+                    <div class="skeleton skeleton-text smaller thinner"></div>
+                </h3>
+                <p class="time minor small">Min</p>
+            </div>
         </div>
     </section>
 </body>

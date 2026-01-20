@@ -231,7 +231,7 @@ provinceSelect.addEventListener("input", function () {
             .setContent(`
                     Comune di: <b>${comune.nome}</b><br>
                     <img src="${weatherCodeToImage(comune.weatherCode)}"
-                        style="width:100px;height:100px;">
+                        style="width:100px;height:auto;">
                 `)
             .openOn(map);
 
@@ -307,7 +307,7 @@ comuneSearchInput.addEventListener("change", function () {
                         .setContent(`
                                 Comune di: <b>${nomeComune}</b><br>
                                 <img src="${weatherCodeToImage(data.current.weather_code)}"
-                                    style="width:100px;height:100px;">  
+                                    style="width:100px;height:auto;">  
                             `)
                         .openOn(map);
 

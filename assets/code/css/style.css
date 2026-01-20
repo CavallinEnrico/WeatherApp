@@ -25,7 +25,9 @@
     --bg: oklch(0.2 0 264);
     --bg-light: oklch(0.24 0 264);
     --bg-primary: oklch(40.54% 0.00005 271.152);
+    --bg-lighter: oklch(43.861% 0.00005 271.152);
     --text: oklch(0.96 0 264);
+    --text-paragraph: oklch(0.76 0 264);
     --clock: oklch(0.76 0 264);
     --text-muted: oklch(0.76 0 264);
     --text-value: oklch(0.96 0 264);
@@ -43,8 +45,10 @@ body.light {
     --bg-dark: oklch(0.955 0 264);
     --bg: oklch(0.96 0 264);
     --bg-light: oklch(0.82 0 264);
+    --bg-lighter: oklch(0.75 0 264);
     --bg-primary: oklch(97.015% 0.00011 271.152);
     --text: oklch(0.4 0 264);
+    --text-paragraph: oklch(0.4 0 264);
     --clock: oklch(0.4 0 264);
     --text-muted: oklch(0.65 0 264);
     --text-value: oklch(0.33 0 264);
@@ -83,7 +87,7 @@ h3 {
 h4 {
     font: var(--p);
     max-width: 80ch;
-    color: var(--text-muted);
+    color: var(--text-paragraph);
 }
 
 p {
@@ -181,39 +185,6 @@ a:hover {
     "app-title home clock theme";
 }
 
-@media (min-width: 40rem) {
-    .app-title {
-        width: 19.5rem;
-    }
-}
-
-@media (max-width: 40rem) {
-    .nav {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas:
-        "app-title theme"
-        "home clock";
-    }
-    .app-title {
-        width: 17rem;
-    }
-
-    .clock {
-        margin-left: auto;
-        margin-right: 1rem;
-    }
-    .home-link {
-        margin-top: 0.5rem;
-        margin-left: 1rem;
-    }
-}
-
-@media (max-width: 400px) {
-    .app-title {
-        width: 14rem;
-    }
-}
-
 .item {
     display: flex;
     align-items: center;
@@ -284,6 +255,10 @@ a:hover {
     min-height: 180px;
 }
 
+#precipitations-card {
+    height: 400px;
+}
+
 #presentation-card {
     max-width: 430px;
     align-items: flex-start;
@@ -297,7 +272,56 @@ a:hover {
 #precipitations-value {
     font-size: 3rem;
 }
+#precipitations-sum-value {
+    font-size: 3rem;
+}
 
+#temp-value {
+    margin-bottom: 0rem;
+}
+
+.inner-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-lighter);
+    border-radius: 1.5rem;
+    padding-left: 1.7rem;
+    padding-right: 1.7rem;
+    height: 15rem;
+    width: 10rem;
+    box-shadow: var(--shadow-s);
+    margin-top: 1rem;
+}
+
+#temperature-card .inner-card {
+    padding-top: 1rem;
+    height: 17.5rem;
+    width: 10rem;
+}
+
+#feels-like-value {
+    margin-bottom: 0;
+    font-size: 3rem;
+    color: var(--text-paragraph);
+}
+
+#max-value, #min-value {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    color: var(--text-paragraph);
+}
+
+.minor {
+    margin-top: 0.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.small {
+    font: var(--small);
+    letter-spacing: 0.1rem;
+}
 
 .info-card h2 {
     margin-bottom: 0.05rem;
@@ -322,7 +346,7 @@ a:hover {
 
 .paragraph {
     height: 1rem;
-    width: 23rem;
+    width: 22rem;
     margin-bottom: 0.3rem;
 }
 
@@ -330,7 +354,39 @@ a:hover {
     width: 18rem;
 }
 
-/* AL CARICAMENTO SKELETON NON SCOMPARE */
+.smaller {
+    height: 3rem;
+}
+
+.thinner {
+    width: 6.5rem;
+}
+
+.super-small {
+    width: 4rem;
+    height: 1.5rem;
+    justify-self: center;
+    margin-bottom: 0.5rem;
+}
+
+#wind-dir-value {
+    font: var(--h3);
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+#wind-value {
+    font-size: 2.5em;
+    margin-bottom: 0.5rem;
+}
+
+#temperature-card {
+    height: 430px;
+}
+
+#precipitations-card {
+    height: 430px;
+}
 
 @keyframes skeleton-loading {
     0% {
@@ -414,3 +470,133 @@ form {
 #index .navbar {
     margin-bottom: 1rem;
 }
+
+/* Day selector */
+    
+
+.day-selector {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.day-slide-content {
+    cursor: pointer;
+    width: 8rem;
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.day-slide-content-small {
+    cursor: pointer;
+    width: 6rem;
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.day-slide-content-smaller {
+    cursor: pointer;
+    width: 4rem;
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.day-slide {
+    border-radius: 0.1rem;
+    width: 8rem;
+    height: 0.1rem;
+    background: var(--bg-lighter);
+}
+
+.day-slide-small {
+    border-radius: 0.1rem;
+    width: 6rem;
+    height: 0.1rem;
+    background: var(--bg-lighter);
+}
+
+.day-slide-smaller {
+    border-radius: 0.1rem;
+    width: 4rem;
+    height: 0.1rem;
+    background: var(--bg-lighter);
+}
+
+/* Media queries */
+
+@media (min-width: 40rem) {
+    .app-title {
+        width: 19.5rem;
+    }
+}
+
+@media (max-width: 40rem) {
+    .nav {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+        "app-title theme"
+        "home clock";
+    }
+    .app-title {
+        width: 17rem;
+    }
+
+    .clock {
+        margin-left: auto;
+        margin-right: 1rem;
+    }
+    .home-link {
+        margin-top: 0.5rem;
+        margin-left: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .app-title {
+        width: 16rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .app-title {
+        width: 14.2rem;
+    }
+}
+
+/* Responsive paragraphs in presentation card */
+
+@media (max-width: 480px) {
+    .paragraph {
+        max-width: 20rem;
+    }
+    .paragraph:last-child {
+        max-width: 16rem;
+    }
+}
+
+@media (max-width: 410px) {
+    .paragraph {
+        max-width: 18rem;
+    }
+    .paragraph:last-child {
+        max-width: 14rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .paragraph {
+        max-width: 16rem;
+    }
+    .paragraph:last-child {
+        max-width: 13rem;
+    }
+}
+
