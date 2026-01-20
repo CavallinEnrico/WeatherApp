@@ -43,22 +43,66 @@ setInterval(updateClock, 3000);
 
 async function fetchDailyWeather(dateDiff) {
     const date = formatDate(dateDiff)
-    const weatherData = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,wind_speed_10m,wind_direction_10m,weather_code&timezone=auto&start_date=${date}&end_date=${date}`)
-    const weatherJson = await weatherData.json()
-    const currentData = weatherJson.current
-    const dailyData = weatherJson.daily
 
-    document.querySelector("#temp-value").innerText = `${currentData.temperature_2m}°C`
-    document.querySelector("#humidity-value").innerText = `${currentData.relative_humidity_2m}%`
-    document.querySelector("#precipitations-value").innerText = `${currentData.precipitation}mm`
+    // Request daily summary and hourly series for the target date so we can pick
+    // the value at the same hour as now on that date.
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,wind_speed_10m,wind_direction_10m&timezone=auto&start_date=${date}&end_date=${date}`
+    const weatherData = await fetch(url)
+    const weatherJson = await weatherData.json()
+    const dailyData = weatherJson.daily || { temperature_2m_max: [null], temperature_2m_min: [null], precipitation_sum: [null] }
+
+    // Find the hourly index for the same hour-of-day as now on the requested date
+    const now = new Date()
+    const targetHour = String(now.getHours()).padStart(2, '0')
+    let hourIndex = -1
+    if (weatherJson.hourly && Array.isArray(weatherJson.hourly.time)) {
+        const times = weatherJson.hourly.time
+        for (let i = 0; i < times.length; i++) {
+            if (times[i].slice(0, 10) === date && times[i].slice(11, 13) === targetHour) {
+                hourIndex = i
+                break
+            }
+        }
+    }
+
+    // Extract values from hourly series if available, otherwise fall back to current/daily values
+    let temp, humidity, precip, windSpeed, windDir, apparent
+    if (hourIndex >= 0 && weatherJson.hourly) {
+        const h = weatherJson.hourly
+        temp = h.temperature_2m ? h.temperature_2m[hourIndex] : null
+        humidity = h.relative_humidity_2m ? h.relative_humidity_2m[hourIndex] : null
+        precip = h.precipitation ? h.precipitation[hourIndex] : null
+        windSpeed = h.wind_speed_10m ? h.wind_speed_10m[hourIndex] : null
+        windDir = h.wind_direction_10m ? h.wind_direction_10m[hourIndex] : null
+        apparent = h.apparent_temperature ? h.apparent_temperature[hourIndex] : temp
+    } else if (weatherJson.current) {
+        const currentData = weatherJson.current
+        temp = currentData.temperature_2m
+        humidity = currentData.relative_humidity_2m
+        precip = currentData.precipitation
+        windSpeed = currentData.wind_speed_10m
+        windDir = currentData.wind_direction_10m
+        apparent = currentData.apparent_temperature
+    } else {
+        temp = dailyData.temperature_2m_max[0]
+        humidity = null
+        precip = dailyData.precipitation_sum[0]
+        windSpeed = null
+        windDir = null
+        apparent = temp
+    }
+
+    document.querySelector("#temp-value").innerText = `${temp}°C`
+    document.querySelector("#humidity-value").innerText = `${humidity ?? '-'}%`
+    document.querySelector("#precipitations-value").innerText = `${precip ?? '-'}mm`
     document.querySelector("#precipitations-sum-value").innerText = `${dailyData.precipitation_sum[0]}mm`
-    document.querySelector("#wind-value").innerText = `${currentData.wind_speed_10m}km/h`
-    document.querySelector("#wind-dir-value").innerText = calculateWindDirection(currentData.wind_direction_10m)
-    document.querySelector("#feels-like-value").innerText = `${currentData.apparent_temperature}°C`
+    document.querySelector("#wind-value").innerText = `${windSpeed ?? '-'}km/h`
+    document.querySelector("#wind-dir-value").innerText = calculateWindDirection(windDir)
+    document.querySelector("#feels-like-value").innerText = `${apparent}°C`
     document.querySelector("#max-value").innerText = `${dailyData.temperature_2m_max[0]}°C`
     document.querySelector("#min-value").innerText = `${dailyData.temperature_2m_min[0]}°C`
 
-    presentationData = await fetchPresentation(dailyData.precipitation_sum, currentData.temperature_2m, currentData.apparent_temperature, dailyData.temperature_2m_max[0], dailyData.temperature_2m_min[0], currentData.relative_humidity_2m, currentData.wind_speed_10m, calculateWindDirection(currentData.wind_direction_10m))
+    presentationData = await fetchPresentation(dailyData.precipitation_sum, temp, apparent, dailyData.temperature_2m_max[0], dailyData.temperature_2m_min[0], humidity, windSpeed, calculateWindDirection(windDir))
 }
 
 function calculateWindDirection(degree) {
@@ -90,14 +134,38 @@ async function fetchPresentation(prec, temp, feelsLike, maxTemp, minTemp, humidi
 }
 
 function formatDate(diff) {
-    let returnDate = ""
     const date = new Date()
-    date.setDate(date.getDate() + diff)
-    returnDate = date.getFullYear() + "-"
-    if (date.getMonth() + 1 < 10)
-        returnDate += "0"
-    returnDate += (date.getMonth() + 1)
-    returnDate += "-" + date.getDate()
-    return returnDate
+    date.setDate(date.getDate() + Number(diff))
+    const yyyy = date.getFullYear()
+    const mm = String(date.getMonth() + 1).padStart(2, '0')
+    const dd = String(date.getDate()).padStart(2, '0')
+    return `${yyyy}-${mm}-${dd}`
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const ids = ["d-3", "d-2", "d-1", "d0", "d+1", "d+2", "d+3"]
+    const elems = ids.map(id => document.getElementById(id)).filter(Boolean)
+
+    function idToDiff(id) {
+        // id examples: "d-3", "d-2", "d-1", "d0", "d+1"
+        if (!id || id[0] !== 'd') return 0
+        const suffix = id.slice(1) // "-3", "0", "+1"
+        const n = parseInt(suffix, 10)
+        return Number.isNaN(n) ? 0 : n
+    }
+
+    function setActive(selected) {
+        elems.forEach(el => {
+            if (el === selected) el.classList.add("active")
+            else el.classList.remove("active")
+        })
+
+        // compute diff from id and fetch daily weather
+        const diff = idToDiff(selected.id)
+        fetchDailyWeather(diff)
+    }
+
+    elems.forEach(el => {
+        el.addEventListener("click", () => setActive(el))
+    })
+})

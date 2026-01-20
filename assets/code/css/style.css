@@ -26,6 +26,7 @@
     --bg-light: oklch(0.24 0 264);
     --bg-primary: oklch(40.54% 0.00005 271.152);
     --bg-lighter: oklch(43.861% 0.00005 271.152);
+    --bg-focus: oklch(84.522% 0.0001 271.152);
     --text: oklch(0.96 0 264);
     --text-paragraph: oklch(0.76 0 264);
     --clock: oklch(0.76 0 264);
@@ -47,6 +48,7 @@ body.light {
     --bg-light: oklch(0.82 0 264);
     --bg-lighter: oklch(0.75 0 264);
     --bg-primary: oklch(97.015% 0.00011 271.152);
+    --bg-focus: oklch(39.418% 0.00004 271.152);
     --text: oklch(0.4 0 264);
     --text-paragraph: oklch(0.4 0 264);
     --clock: oklch(0.4 0 264);
@@ -472,7 +474,6 @@ form {
 }
 
 /* Day selector */
-    
 
 .day-selector {
     margin-top: 1rem;
@@ -516,18 +517,21 @@ form {
     background: var(--bg-lighter);
 }
 
-.day-slide-small {
-    border-radius: 0.1rem;
+.smallDS {
     width: 6rem;
-    height: 0.1rem;
-    background: var(--bg-lighter);
 }
 
-.day-slide-smaller {
-    border-radius: 0.1rem;
+.smallerDS {
     width: 4rem;
-    height: 0.1rem;
-    background: var(--bg-lighter);
+}
+
+.active {
+   p {
+    color: var(--bg-focus);
+   }
+   .day-slide {
+     background: var(--bg-focus);
+   }
 }
 
 /* Media queries */
