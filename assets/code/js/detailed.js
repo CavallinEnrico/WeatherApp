@@ -95,7 +95,7 @@ async function fetchDailyWeather(dateDiff) {
     document.querySelector("#temp-value").innerText = `${temp}°C`
     document.querySelector("#humidity-value").innerText = `${humidity ?? '-'}%`
     document.querySelector("#precipitations-value").innerText = `${precip ?? '-'}mm`
-    document.querySelector("#precipitations-sum-value").innerText = `${dailyData.precipitation_sum[0]}mm`
+    document.querySelector("#precipitations-sum-value").innerText = `${dailyData.precipitation_sum[0]}`
     document.querySelector("#wind-value").innerText = `${windSpeed ?? '-'}km/h`
     document.querySelector("#wind-dir-value").innerText = calculateWindDirection(windDir)
     document.querySelector("#feels-like-value").innerText = `${apparent}°C`
@@ -144,28 +144,59 @@ function formatDate(diff) {
 
 document.addEventListener("DOMContentLoaded", () => {
     const ids = ["d-3", "d-2", "d-1", "d0", "d+1", "d+2", "d+3"]
-    const elems = ids.map(id => document.getElementById(id)).filter(Boolean)
+
+    // Collect all elements that match the ids. Use querySelectorAll so
+    // duplicated IDs (mobile + desktop) are both included.
+    const elems = ids.flatMap(id => Array.from(document.querySelectorAll(`[id="${id}"]`))).filter(Boolean)
 
     function idToDiff(id) {
-        // id examples: "d-3", "d-2", "d-1", "d0", "d+1"
         if (!id || id[0] !== 'd') return 0
-        const suffix = id.slice(1) // "-3", "0", "+1"
+        const suffix = id.slice(1)
         const n = parseInt(suffix, 10)
         return Number.isNaN(n) ? 0 : n
     }
 
     function setActive(selected) {
-        elems.forEach(el => {
-            if (el === selected) el.classList.add("active")
-            else el.classList.remove("active")
-        })
+        // Remove active from every known element
+        elems.forEach(el => el.classList.remove("active"))
+
+        // Add active to every element that shares the same id (desktop + mobile)
+        const sameId = Array.from(document.querySelectorAll(`[id="${selected.id}"]`))
+        sameId.forEach(el => el.classList.add("active"))
 
         // compute diff from id and fetch daily weather
         const diff = idToDiff(selected.id)
         fetchDailyWeather(diff)
     }
 
+    // Attach listeners to every element (desktop and mobile variants)
     elems.forEach(el => {
         el.addEventListener("click", () => setActive(el))
     })
+
+    // Center the currently-active mobile element (e.g. d0) if overflow occurs
+    const mobileContainer = document.querySelector('.day-selector-mobile')
+    function centerMobileForId(id, smooth = true) {
+        if (!mobileContainer) return
+        if (mobileContainer.scrollWidth <= mobileContainer.clientWidth) return
+        // find the mobile variant of the element with this id
+        const mobileEl = Array.from(document.querySelectorAll(`[id="${id}"]`)).find(el => el.closest('.day-selector-mobile'))
+        if (!mobileEl) return
+        try {
+            mobileEl.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', inline: 'center', block: 'nearest' })
+        } catch (e) {
+            // fallback: compute scrollLeft to center
+            const offset = mobileEl.offsetLeft - (mobileContainer.clientWidth - mobileEl.clientWidth) / 2
+            mobileContainer.scrollTo({ left: offset, behavior: smooth ? 'smooth' : 'auto' })
+        }
+    }
+
+    // center on click as well
+    elems.forEach(el => {
+        el.addEventListener('click', () => centerMobileForId(el.id, true))
+    })
+
+    // center initial active element without animation
+    const initialActive = Array.from(document.querySelectorAll('.day-slide-content-mobile.active'))[0]
+    if (initialActive) centerMobileForId(initialActive.id, false)
 })
