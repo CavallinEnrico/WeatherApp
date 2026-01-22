@@ -41,25 +41,27 @@
 
     <section class="hero">
         <div id="map"></div>
-        <p>Regione selezionata:</p>
-        <select id="region">
-            <option value="">-- Seleziona regione --</option>
-        </select>
+        <div class="info-card expanded">
+            <p>Regione selezionata:</p>
+            <select id="region">
+                <option value="">-- Seleziona regione --</option>
+            </select>
 
-        <p>Provincia selezionata:</p>
-        <select id="province" disabled>
-            <option value="">-- Seleziona provincia --</option>
-        </select>
+            <p>Provincia selezionata:</p>
+            <select id="province" disabled>
+                <option value="">-- Seleziona provincia --</option>
+            </select>
 
-        <p>Comune (ricerca):</p>
-        <input type="text" id="comuneSearch" list="comuniList" placeholder="Scrivi il nome del comune..." disabled>
+            <p>Comune (ricerca):</p>
+            <input type="text" id="comuneSearch" list="comuniList" placeholder="Scrivi il nome del comune..." disabled>
 
-        <datalist id="comuniList"></datalist>
+            <datalist id="comuniList"></datalist>
 
 
-        <p>Comune selezionato: <span id="comuneSelezionato"></span></p>
+            <p>Comune selezionato: <span id="comuneSelezionato"></span></p>
 
-        <button id="inviaBtn">Dettagli</button>
+            <button id="inviaBtn">Dettagli</button>
+        </div>
     </section>
 
 </body>
