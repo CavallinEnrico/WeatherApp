@@ -550,6 +550,11 @@ form {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 0.25rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    align-self: stretch;
+    white-space: nowrap;
 }
 
 .day-slide-content-mobile {
