@@ -345,6 +345,7 @@ function geocodeComune(nomeComune) {
                 throw new Error(`Nessun risultato per: ${nomeComune}`);
             }
 
+            // Scarta risultati non appartenenti alla provincia selezionata
             let r = data.results[0];
             if (
                 r.admin2 &&

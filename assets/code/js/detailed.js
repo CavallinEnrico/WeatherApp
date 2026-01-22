@@ -97,7 +97,7 @@ async function fetchDailyWeather(dateDiff) {
     document.querySelector("#precipitations-value").innerText = `${precip ?? '-'}mm`
     document.querySelector("#precipitations-sum-value").innerText = `${dailyData.precipitation_sum[0]}`
     document.querySelector("#wind-value").innerText = `${windSpeed ?? '-'}km/h`
-    document.querySelector("#wind-dir-value").innerText = calculateWindDirection(windDir)
+    document.querySelector("#wind-dir-value").innerText = "Direzione: " + calculateWindDirection(windDir)
     document.querySelector("#feels-like-value").innerText = `${apparent}°C`
     document.querySelector("#max-value").innerText = `${dailyData.temperature_2m_max[0]}°C`
     document.querySelector("#min-value").innerText = `${dailyData.temperature_2m_min[0]}°C`
@@ -106,25 +106,16 @@ async function fetchDailyWeather(dateDiff) {
 }
 
 function calculateWindDirection(degree) {
-    switch (degree) {
-        case degree >= 22.5 && degree < 67.5:
-            return "NE"
-        case degree >= 67.5 && degree < 112.5:
-            return "E"
-        case degree >= 112.5 && degree < 157.5:
-            return "SE"
-        case degree >= 157.5 && degree < 202.5:
-            return "S"
-        case degree >= 202.5 && degree < 247.5:
-            return "SW"
-        case degree >= 247.5 && degree < 292.5:
-            console.log("CIAO")
-            return "W"
-        case degree >= 292.5 && degree < 337.5:
-            return "NW"
-        default:
-            return "N"
-    }
+    const d = Number(degree)
+    if (Number.isNaN(d)) return "Error"
+    if (d >= 22.5 && d < 67.5) return "NE"
+    if (d >= 67.5 && d < 112.5) return "E"
+    if (d >= 112.5 && d < 157.5) return "SE"
+    if (d >= 157.5 && d < 202.5) return "S"
+    if (d >= 202.5 && d < 247.5) return "SW"
+    if (d >= 247.5 && d < 292.5) return "W"
+    if (d >= 292.5 && d < 337.5) return "NW"
+    return "N"
 }
 
 async function fetchPresentation(prec, temp, feelsLike, maxTemp, minTemp, humidity, windSpeed, windDir) {
