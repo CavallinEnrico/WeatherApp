@@ -134,7 +134,7 @@ function formatDate(diff) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const ids = ["d-3", "d-2", "d-1", "d0", "d+1", "d+2", "d+3"]
+    const ids = ["d-5", "d-4", "d-3", "d-2", "d-1", "d0", "d+1", "d+2", "d+3", "d+4", "d+5"]
 
     // Collect all elements that match the ids. Use querySelectorAll so
     // duplicated IDs (mobile + desktop) are both included.

@@ -597,19 +597,16 @@ form {
 
 /* Media queries */
 
-@media (max-width: 940px) {
+@media (max-width: 1320px) {
     .day-selector {
         gap: 1rem;
     }
 }
 
-@media (min-width: 871px) {
+@media (min-width: 1321px) {
     .day-selector-mobile {
         display: none;
     }
-}
-
-@media (max-width: 860px) {
 }
  
 @media (min-width: 40rem) {
@@ -621,7 +618,7 @@ form {
     }
 }
 
-@media (max-width: 870px) {
+@media (max-width: 1320px) {
     .day-selector {
         display: none;
     }
