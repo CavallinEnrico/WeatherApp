@@ -542,6 +542,7 @@ form {
 }
 
 .day-selector-mobile {
+    justify-content: center;
     display: flex;
     flex-direction: row;
     gap: 1rem;
